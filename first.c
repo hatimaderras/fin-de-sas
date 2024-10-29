@@ -63,25 +63,3 @@ int main()
         printf("4:delete a tasks\n");
         printf("Choose une option : ");
         scanf("%d",&choice);
-        switch(choice){
-       case 1:
-            if (nbr_tasks<50){
-            add_tasks(&tasks[nbr_tasks]);
-            nbr_tasks++;
-            }else { printf("this number doesnt exist");
-            }
-            break;
-
-
-       case 2:
-        if(nbr_tasks==0)
-        {
-            printf("you can't");
-        } else {
-            for(i=0;i<nbr_tasks;i++);
-            display_tasks(tasks[i]);
-
-        } break;
-          }
-
-}
