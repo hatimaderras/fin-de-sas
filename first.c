@@ -18,12 +18,13 @@ void add_tasks(struct tasks *task) {
     printf("Enter date (YYYY-MM-DD): ");
     scanf(" %[^\n]%*c", task->date);
 
-    printf("Please enter a priority level between 1 and 10 (1 is the highest priority, 10 is the lowest): ");
+    printf("Please enter a priority level between 1 and 0: 1 being the high and 0 being the low priority): ");
     scanf("%d", &task->priorite);
 }
 // Function to display a task
 
 void display_tasks(struct tasks task) {
+    printf("-----------tasks------\n");
     printf("Title: %s\n", task.title);
     printf("Description: %s\n", task.description);
     printf("Date: %s\n", task.date);
@@ -40,7 +41,7 @@ void modifier_tasks(struct tasks *task) {
     printf("Enter date (YYYY-MM-DD): ");
     scanf(" %[^\n]%*c", task->date);
 
-    printf("Please enter a priority level between 1 and 10 (1 is the highest priority, 10 is the lowest): ");
+    printf("Please enter a priority level between 1 and 0?): ");
     scanf("%d", &task->priorite);
 }
 // Function to delete an existing task
@@ -51,11 +52,25 @@ void delete_tasks(struct tasks tasks[], int *nbr_tasks, int index) {
     }
     (*nbr_tasks)--;
 }
+// Function to display tasks based on priority filter
+void display_tasks_by_priority(struct tasks tasks[], int nbr_tasks, int priority_filter) {
+    int found = 0;
+    for (int i = 0; i < nbr_tasks; i++) {
+        if (tasks[i].priorite == priority_filter) {
+            display_tasks(tasks[i]);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("No tasks found with %s priority.\n", priority_filter == 1 ? "High" : "Low");
+    }
+}
+
 
 int main() {
     struct tasks tasks[100];
     int nbr_tasks = 0;
-    int index, choice, i;
+    int index, choice, i,priority_filter;
 // Display options in a loop
     do {
         printf("1: Enter tasks\n");
@@ -63,6 +78,7 @@ int main() {
         printf("3: Modify a task\n");
         printf("4: Delete a task\n");
         printf("5: Exit\n");
+        printf("6: Display tasks by priority\n");
         printf("Choose an option: ");
         scanf("%d", &choice); // choice dyal user from 1/5
 
@@ -117,6 +133,15 @@ int main() {
 
      case 5: // exit option
                 printf("Goodbye!\n");
+                break;
+    case 6: // Option to display tasks by priority
+                printf("Enter priority to filter by (0 for Low Priority, 1 for High Priority): ");
+                scanf("%d", &priority_filter);
+                if (priority_filter == 0 || priority_filter == 1) {
+                    display_tasks_by_priority(tasks, nbr_tasks, priority_filter);
+                } else {
+                    printf("Invalid priority. Enter 0 for Low or 1 for High.\n");
+                }
                 break;
 
             default:
