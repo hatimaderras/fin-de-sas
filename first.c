@@ -2,29 +2,30 @@
 struct tasks{
 char title[300];
 char description[300];
-int date;
+char date;
 int priorite;
 
 };
-void add_tasks(struct tasks *task) {
+void add_tasks(struct tasks *tasks) {
     printf("Enter title: ");
-    fgets(task->title, sizeof(task->title), stdin);
+    scanf(" %[^\n]%*c",tasks->title);
+
 
     printf("Enter description: ");
-    fgets(task->description, sizeof(task->description), stdin);
+   scanf(" %[^\n]%*c",tasks->description);
 
     printf("Enter date: ");
-    scanf("%d", &task->date);
+    scanf(" %[^\n]%*c", &tasks->date);
 
     printf("Please enter a priority level between 1 and 10, where 1 is the highest priority and 10 is the lowest: ");
-    scanf("%d", &task->priorite);
+    scanf("d", &tasks->priorite);
 }
 void display_tasks(struct tasks tasks)
 {
-    printf("your title:",tasks.title);
-    printf("your title:",tasks.description);
-    printf("your title:",tasks.date);
-    printf("your title:",tasks.priorite);
+    printf("your title:%s",tasks.title);
+    printf("your title:%s",tasks.description);
+    printf("your title:%d",tasks.date);
+    printf("your title:%d",tasks.priorite);
 
 }
 void modifier_tasks(struct tasks *tasks)
@@ -45,8 +46,42 @@ void delete_date(struct tasks tasks[],int *nbr_tasks,int index)
 {
     for(int i=index;i<(*nbr_tasks)-1;i++)
     {
-         nbr_tasks[i]=nbr_tasks[i+1];
+         tasks[i]=tasks[i+1];
 
     } (*nbr_tasks)--;
+
+}
+int main()
+{
+    struct tasks tasks[100];
+    int nbr_tasks=0;
+    int indice,choice,i;
+    do {
+        printf("1:enter the tasks\n");
+        printf("2:display all tasks\n");
+        printf("3:modifier a tasks\n");
+        printf("4:delete a tasks\n");
+        printf("Choose une option : ");
+        scanf("%d",&choice);
+        switch(choice){
+       case 1:
+            if (nbr_tasks<50){
+            add_tasks(&tasks[nbr_tasks]);
+            nbr_tasks++;
+            }else { printf("this number doesnt exist");
+            }
+            break;
+
+
+       case 2:
+        if(nbr_tasks==0)
+        {
+            printf("you can't");
+        } else {
+            for(i=0;i<nbr_tasks;i++);
+            display_tasks(tasks[i]);
+
+        } break;
+          }
 
 }
