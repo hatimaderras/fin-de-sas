@@ -120,9 +120,9 @@ int main() {
                 if (nbr_tasks == 0) {
                     printf("There are no tasks.\n");
                 } else {
-                    printf("Enter the number of the task you want to delete (0 to %d): ", nbr_tasks - 1);
+                    printf("Enter the number of the task you want to delete (you have %d tasks): ", nbr_tasks);
                     scanf("%d", &index);
-                    index-=1; // hit array ktbda mn 0 if user put 1 it will be index 2 in the array
+                    index-=1;
                     if (index >= 0 && index < nbr_tasks) {
                         delete_tasks(tasks, &nbr_tasks, index);
                     } else {
