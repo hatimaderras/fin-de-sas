@@ -32,17 +32,33 @@ void display_tasks(struct tasks task) {
 }
 // Function to modifie an existing task
 void modifier_tasks(struct tasks *task) {
-    printf("Enter title: ");
-    scanf(" %[^\n]%*c", task->title);
-
-    printf("Enter description: ");
-    scanf(" %[^\n]%*c", task->description);
-
-    printf("Enter date (YYYY-MM-DD): ");
-    scanf(" %[^\n]%*c", task->date);
-
-    printf("Please enter a priority level between 1 and 0?): ");
-    scanf("%d", &task->priorite);
+    int modifie;
+    printf("entre 1 to modifie title:\n");
+    printf("entre 2 to modifie description:\n");
+    printf("entre 3 to modifie date:\n");
+    printf("entre 4 to modifie priority:\n");
+    printf("choose an option from 1 to 4:");
+    scanf("%d",&modifie);
+    switch(modifie){
+     case 1:
+        printf("entre new title:");
+        scanf(" %[^\n]%*c",task->title);
+        break;
+     case 2:
+        printf("entre new descreption:");
+        scanf(" %[^\n]%*c",task->description);
+        break;
+     case 3:
+        printf("entre new date:");
+        scanf(" %[^\n]%*c",task->date);
+        break;
+     case 4:
+        printf("entre new priority:");
+        scanf("%d",&task->priorite);
+        break;
+     default:
+        printf("invalide choice.");
+    }
 }
 // Function to delete an existing task
 
@@ -105,7 +121,7 @@ int main() {
                 if (nbr_tasks == 0) {
                     printf("There are no tasks.\n");
                 } else {
-                    printf("Enter the number of the task you want to modify (0 to %d): ", nbr_tasks - 1);
+                    printf("Enter the number of the task you want to modify (you have %d tasks): ", nbr_tasks);
                     scanf("%d", &index);
                     index-=1;
                     if (index >= 0 && index < nbr_tasks) {
@@ -143,12 +159,8 @@ int main() {
                     printf("Invalid priority. Enter 0 for Low or 1 for High.\n");
                 }
                 break;
-
-            default:
-                printf("Invalid choice.\n");
         }
     } while (choice != 5);// kteawd hta user kikhtar exit
 
     return 0; // kikhrj lprograme
 }
-
