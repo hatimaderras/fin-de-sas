@@ -88,16 +88,12 @@ void delete_tasks(struct tasks tasks[], int *nbr_tasks, int index) {
     (*nbr_tasks)--;
 }
 // Function to display tasks based on priority filter
-void display_tasks_by_priority(struct tasks tasks[], int nbr_tasks, int priority_filter) {
-    int found = 0;
+void filtrer_par_priorite(struct tasks tasks[], int nbr_tasks, int priorite) {
+    printf("\n--- Tasks with priority %s ---\n", priorite == 0 ? "Low" : "High");
     for (int i = 0; i < nbr_tasks; i++) {
-        if (tasks[i].priorite == priority_filter) {
+        if (tasks[i].priorite == priorite) {
             display_tasks(tasks[i]);
-            found = 1;
         }
-    }
-    if (!found) {
-        printf("No tasks found with %s priority.\n", priority_filter == 1 ? "High" : "Low");
     }
 }
 
@@ -169,11 +165,11 @@ int main() {
      case 5: // exit option
                 printf("Goodbye!\n");
                 break;
-    case 6: // Option to display tasks by priority
+     case 6: // Option to display tasks by priority
                 printf("Enter priority to filter by (0 for Low Priority, 1 for High Priority): ");
                 scanf("%d", &priority_filter);
                 if (priority_filter == 0 || priority_filter == 1) {
-                    display_tasks_by_priority(tasks, nbr_tasks, priority_filter);
+                    filtrer_par_priorite(tasks, nbr_tasks, priority_filter);
                 } else {
                     printf("Invalid priority. Enter 0 for Low or 1 for High.\n");
                 }
