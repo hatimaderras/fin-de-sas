@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include <string.h>
-
+// struct date so user can put day and month and years separate
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+// struct hold element of the tasks
 struct tasks {
     char title[300];
     char description[300];
-    char date[11];
+    struct Date date_sep;
     int priorite;
 };
 // Function to add a new task
@@ -15,8 +21,14 @@ void add_tasks(struct tasks *task) {
     printf("Enter description: ");
     scanf(" %[^\n]%*c", task->description);
 
-    printf("Enter date (YYYY-MM-DD): ");
-    scanf(" %[^\n]%*c", task->date);
+     printf("Enter day: ");
+    scanf("%d", &task->date_sep.day);
+
+    printf("Enter month: ");
+    scanf("%d", &task->date_sep.month);
+
+    printf("Enter year: ");
+    scanf("%d", &task->date_sep.year);
 
     printf("Please enter a priority level between 1 and 0: 1 being the high and 0 being the low priority): ");
     scanf("%d", &task->priorite);
@@ -27,7 +39,7 @@ void display_tasks(struct tasks task) {
     printf("-----------tasks------\n");
     printf("Title: %s\n", task.title);
     printf("Description: %s\n", task.description);
-    printf("Date: %s\n", task.date);
+    printf("Date: %d/%d/%d\n",task.date_sep.day,task.date_sep.month,task.date_sep.year);
     printf("Priority: %d\n", task.priorite);
 }
 // Function to modifie an existing task
@@ -49,8 +61,15 @@ void modifier_tasks(struct tasks *task) {
         scanf(" %[^\n]%*c",task->description);
         break;
      case 3:
-        printf("entre new date:");
-        scanf(" %[^\n]%*c",task->date);
+    printf("Enter day: ");
+    scanf("%d", &task->date_sep.day);
+
+    printf("Enter month: ");
+    scanf("%d", &task->date_sep.month);
+
+    printf("Enter year: ");
+    scanf("%d", &task->date_sep.year);
+
         break;
      case 4:
         printf("entre new priority:");
